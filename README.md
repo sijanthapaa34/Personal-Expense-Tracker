@@ -1,4 +1,6 @@
 💸 AI-Powered Personal Expense Tracker
+
+
 A modern Spring Boot application that integrates with Cohere’s Large Language Model (LLM) to deliver smart, personalized financial management. This project combines RESTful backend services with AI to provide seamless expense tracking, intelligent categorization, and budget-conscious insights.
 
 ✨ Key Features
