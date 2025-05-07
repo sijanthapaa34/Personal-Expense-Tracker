@@ -1,24 +1,39 @@
-AI-Powered Personal Expense Tracker
-A Spring Boot-based personal expense tracker integrated with Cohere's LLM (Large Language Model) to provide intelligent expense categorization, input parsing, budget-aware insights, monthly expense summaries, and budget alerts. This project bridges modern AI with RESTful backend services, offering personalized financial management solutions.
+💸 AI-Powered Personal Expense Tracker
+A modern Spring Boot application that integrates with Cohere’s Large Language Model (LLM) to deliver smart, personalized financial management. This project combines RESTful backend services with AI to provide seamless expense tracking, intelligent categorization, and budget-conscious insights.
 
-Features
-Expense Categorization: Automatically categorize expenses using Cohere’s LLM for better financial tracking.
+✨ Key Features
+🔍 Intelligent Expense Categorization
+Automatically categorizes expenses using Cohere's LLM to improve financial clarity and tracking.
 
-Budget-Aware Insights: Receive actionable insights based on user expenses and budget constraints.
+📊 Budget-Aware Insights
+Get real-time, AI-powered suggestions and feedback based on your spending patterns and budget constraints.
 
-Monthly Expense Summary: Generate detailed summaries of monthly spending for better budgeting and planning.
+📅 Monthly Summaries
+Generate structured and clear summaries of your monthly expenses to help you plan ahead.
 
-Budget Alerts: Get real-time alerts when approaching or exceeding your budget.
+🚨 Budget Alerts
+Receive instant alerts when you approach or exceed your configured budget.
 
-Secure Authentication: JWT-based authentication for secure user access.
+🔐 Secure Authentication
+Implements JWT-based authentication for user login and secure API access.
 
-RESTful API: A robust REST API that allows integration with frontend applications.
+🛠️ RESTful API
+Exposes a clean and extensible API for seamless integration with frontend or mobile applications.
 
-Technologies Used
-Backend: Spring Boot, Spring Security 6, RESTful APIs
+🧰 Tech Stack
+Backend: Spring Boot, Spring Security 6
 
-Database: MySQL for persistent storage
+AI Integration: Cohere LLM (via API)
 
-AI Integration: Cohere LLM for intelligent categorization and insights
+Database: MySQL
 
-Authentication: JWT for secure user access
+Authentication: JWT
+
+Architecture: RESTful API-first design
+
+💡 Ideal For:
+Developers building AI-integrated financial apps
+
+Students learning Spring Boot with real-world use cases
+
+Anyone looking for smart, secure, and personalized expense tracking
