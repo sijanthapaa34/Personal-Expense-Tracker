@@ -98,23 +98,33 @@ public class CohereService {
         return sb.append("\n\uD83D\uDCDD Summary:\n").append(paragraphSummary).toString();
     }
 
-    public String checkFormattedBudgetAlert(double totalSpent, double budgetLimit) throws Exception {
+    public String checkFormattedBudgetAlert(Map<Category, Double> categoryTotals) {
         StringBuilder sb = new StringBuilder();
+        sb.append("💰 Monthly Category-wise Budget Alert:\n\n");
 
-        sb.append("\uD83D\uDCB0 Budget Alert:\n\n");
-        sb.append(String.format("Budget Limit: $%.2f\n", budgetLimit));
-        sb.append(String.format("Amount Spent: $%.2f\n", totalSpent));
-        sb.append(String.format("Remaining: $%.2f\n\n", budgetLimit - totalSpent));
+        for (Map.Entry<Category, Double> entry : categoryTotals.entrySet()) {
+            Category category = entry.getKey();
+            double spent = entry.getValue();
+            double budgetLimit = category.getMaxBudget();
+            double remaining = budgetLimit - spent;
+            double usage = (spent / budgetLimit) * 100;
 
-        double usage = (totalSpent / budgetLimit) * 100;
-        if (usage >= 100) {
-            sb.append("\uD83D\uDEA8 You've exceeded your budget limit!\n");
-            sb.append("\u2705 Review your monthly goals and adjust categories accordingly.\n");
-        } else if (usage >= 90) {
-            sb.append("\u26A0\uFE0F You are nearing your budget limit.\n");
-            sb.append("\uD83D\uDD0D Consider reducing discretionary expenses.\n");
-        } else {
-            sb.append("\u2705 You're within your budget. Keep it up!\n");
+            sb.append(String.format(" %s\n", category.getDisplayName()));
+            sb.append(String.format("Budget Limit: NPR %.2f\n", budgetLimit));
+            sb.append(String.format("Amount Spent: NPR %.2f\n", spent));
+            sb.append(String.format("Remaining: NPR %.2f\n", remaining));
+
+            if (usage >= 100) {
+                sb.append(" You've exceeded your budget!\n");
+                sb.append(" Review your spending and adjust accordingly.\n");
+            } else if (usage >= 90) {
+                sb.append("️ You are nearing your budget limit.\n");
+                sb.append(" Consider cutting back on non-essential expenses.\n");
+            } else {
+                sb.append(" You're within your budget. Keep it up!\n");
+            }
+
+            sb.append("\n");
         }
 
         return sb.toString();

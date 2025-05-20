@@ -23,5 +23,4 @@ public class ExpenseResponseDTO {
         this.username = username;
     }
 
-    // Getters and setters
 }

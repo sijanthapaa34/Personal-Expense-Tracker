@@ -3,7 +3,7 @@ package com.sijan.finance.controller;
 import com.sijan.finance.dto.ExpenseDTO;
 import com.sijan.finance.dto.ExpenseResponseDTO;
 import com.sijan.finance.dto.ParsedExpense;
-import com.sijan.finance.model.Expense;
+import com.sijan.finance.model.Category;
 import com.sijan.finance.model.Lion;
 import com.sijan.finance.model.LionPrincipal;
 import com.sijan.finance.service.CohereService;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/expenses")
@@ -79,13 +80,15 @@ public class ExpenseController {
     public ResponseEntity<String> checkBudgetStatus(@AuthenticationPrincipal LionPrincipal lionPrincipal) throws Exception {
         Lion lion = lionPrincipal.getLion();
         List<ExpenseResponseDTO> expenses = expenseService.getExpensesByUser(lion);
-        double totalSpent = expenses.stream()
-                .mapToDouble(ExpenseResponseDTO::getAmount)
-                .sum();
+        Map<Category, Double> categoryTotals = expenses.stream()
+                .filter(e -> e.getCategory() != null)
+                .collect(Collectors.groupingBy(
+                        e -> Category.fromDisplayName(e.getCategory()),
+                        Collectors.summingDouble(ExpenseResponseDTO::getAmount)
+                ));
 
-        double budgetLimit = 1000;
 
-        String alert = cohereService.checkFormattedBudgetAlert(totalSpent, budgetLimit);
+        String alert = cohereService.checkFormattedBudgetAlert(categoryTotals);
         return ResponseEntity.ok(alert);
     }
 }
